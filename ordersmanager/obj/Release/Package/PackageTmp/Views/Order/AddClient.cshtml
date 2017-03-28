@@ -1,0 +1,43 @@
+﻿@model ordersmanager.Controllers.Client
+
+<div class="row">
+    <div class="col-md-1">
+        <h2>New Client</h2>
+        @using (Html.BeginForm("Upsert", "Order", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <p>
+                    <input type="hidden" name="ClientId" value="@Model._id" />
+                    @Html.LabelFor(m => m.CompanyName)
+                    @Html.TextBoxFor(m => m.CompanyName)
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.ContactName)
+                    @Html.TextBoxFor(m => m.CompanyName)
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.Email)
+                    @Html.EditorFor(m => m.Email)
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.City)
+                    @Html.TextBoxFor(m => m.City)
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.Phone)
+                    @Html.TextBoxFor(m => m.Phone)
+                </p>
+
+                <p>
+                    <input type="file" name="upload" />
+                </p>
+
+                <p>
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </p>
+            </fieldset>
+
+        }
+    </div>
+</div>

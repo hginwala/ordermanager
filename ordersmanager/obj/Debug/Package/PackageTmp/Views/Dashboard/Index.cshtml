@@ -1,0 +1,34 @@
+﻿@using ordersmanager.Models.Dashboard
+@model Dashboardview
+
+<div class="row">
+    <div class="col-md-4">       
+        <p>
+            @Html.DropDownListFor(model => model.SeasonsViewModel.currentSeason, Model.SeasonsViewModel.Seasons, "-- Select Season --", new { @onchange = "updateClient(this.value)" })
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <p>
+            @Html.DropDownListFor(model => model.ClientsViewModel.currentClientId, Model.ClientsViewModel.ClientSelectList, "-- Select Client --", new { @onchange = "updateClient(this.value)" })
+        </p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function updateClient(val) {
+        // $('#Id').val(val);
+        $.post('/Dashboard/Filter/', 
+             {
+                currentClientId: $('#ClientsViewModel_currentClientId').val(),
+                currentSeason: $('#SeasonsViewModel_currentSeason').val()
+             }, function (data) {
+            /* data is the pure html returned from action method, load it to your page */
+            $('#clientdiv').html(data);
+            /* little fade in effect */
+            $('#clientdiv').fadeIn('fast');
+        },"html");
+        //  console.log($('#Id').val());
+    }
+</script>
